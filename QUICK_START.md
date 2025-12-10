@@ -9,9 +9,24 @@ Get your complete development environment set up in minutes!
    - Click "Windows PowerShell (Admin)" or "Terminal (Admin)"
    - Click "Yes" when Windows asks for permission
 
-**2. Copy and paste this command:**
+**2. Download the installer:**
+
+> ⚠️ **Security Note:** Only run scripts from trusted sources. You can review the script file after downloading.
+
 ```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-WebRequest -Uri "https://raw.githubusercontent.com/AntwerpDesignsIonity/Software-Stack-2025-Coding-S-lang-Needed-for-General-Coders-WINDOWS/main/Install-SoftwareStack.ps1" -OutFile "$env:USERPROFILE\Downloads\Install-SoftwareStack.ps1"; Set-Location $env:USERPROFILE\Downloads; .\Install-SoftwareStack.ps1
+# Download the installer to your Downloads folder
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/AntwerpDesignsIonity/Software-Stack-2025-Coding-S-lang-Needed-for-General-Coders-WINDOWS/main/Install-SoftwareStack.ps1" -OutFile "$env:USERPROFILE\Downloads\Install-SoftwareStack.ps1"
+
+# Navigate to Downloads
+Set-Location $env:USERPROFILE\Downloads
+
+# Optional: Review the script first
+notepad Install-SoftwareStack.ps1
+```
+
+**3. Run the installer:**
+```powershell
+.\Install-SoftwareStack.ps1
 ```
 
 **3. Follow the menu:**

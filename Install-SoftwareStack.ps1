@@ -19,24 +19,15 @@ param(
 )
 
 # Color output functions
-function Write-ColorOutput($ForegroundColor) {
-    $fc = $host.UI.RawUI.ForegroundColor
-    $host.UI.RawUI.ForegroundColor = $ForegroundColor
-    if ($args) {
-        Write-Output $args
-    }
-    $host.UI.RawUI.ForegroundColor = $fc
-}
-
-function Write-Success { Write-ColorOutput Green "✓ $args" }
-function Write-Info { Write-ColorOutput Cyan "ℹ $args" }
-function Write-Warning { Write-ColorOutput Yellow "⚠ $args" }
-function Write-Error { Write-ColorOutput Red "✗ $args" }
+function Write-Success { Write-Host "✓ $args" -ForegroundColor Green }
+function Write-Info { Write-Host "ℹ $args" -ForegroundColor Cyan }
+function Write-Warning { Write-Host "⚠ $args" -ForegroundColor Yellow }
+function Write-Error { Write-Host "✗ $args" -ForegroundColor Red }
 function Write-Header { 
     Write-Host ""
-    Write-ColorOutput Magenta "═══════════════════════════════════════════════════════════════"
-    Write-ColorOutput Magenta "  $args"
-    Write-ColorOutput Magenta "═══════════════════════════════════════════════════════════════"
+    Write-Host "═══════════════════════════════════════════════════════════════" -ForegroundColor Magenta
+    Write-Host "  $args" -ForegroundColor Magenta
+    Write-Host "═══════════════════════════════════════════════════════════════" -ForegroundColor Magenta
     Write-Host ""
 }
 
@@ -195,12 +186,25 @@ function Install-AITools {
     Write-Info "Installing Ollama - Local AI Platform..."
     try {
         $ollamaInstaller = "$env:TEMP\OllamaSetup.exe"
-        Write-Info "Downloading Ollama..."
-        Invoke-WebRequest -Uri "https://ollama.ai/download/OllamaSetup.exe" -OutFile $ollamaInstaller
-        Start-Process -FilePath $ollamaInstaller -ArgumentList "/SILENT" -Wait
-        Remove-Item $ollamaInstaller -Force
-        Write-Success "Ollama installed successfully"
-        Write-Info "Run 'ollama run llama2' to get started with local AI"
+        Write-Info "Downloading Ollama from official source..."
+        Write-Warning "Please verify the download from https://ollama.ai if security is a concern"
+        
+        # Download with progress
+        $ProgressPreference = 'SilentlyContinue'
+        Invoke-WebRequest -Uri "https://ollama.ai/download/OllamaSetup.exe" -OutFile $ollamaInstaller -UseBasicParsing
+        $ProgressPreference = 'Continue'
+        
+        # Verify file was downloaded
+        if (Test-Path $ollamaInstaller) {
+            $fileSize = (Get-Item $ollamaInstaller).Length
+            Write-Info "Downloaded Ollama installer ($([math]::Round($fileSize/1MB, 2)) MB)"
+            Start-Process -FilePath $ollamaInstaller -ArgumentList "/SILENT" -Wait
+            Remove-Item $ollamaInstaller -Force -ErrorAction SilentlyContinue
+            Write-Success "Ollama installed successfully"
+            Write-Info "Run 'ollama run llama2' to get started with local AI"
+        } else {
+            throw "Download failed"
+        }
     } catch {
         Write-Warning "Could not install Ollama automatically. Please visit https://ollama.ai for manual installation"
     }

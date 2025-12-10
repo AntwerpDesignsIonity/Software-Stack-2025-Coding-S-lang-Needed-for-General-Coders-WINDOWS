@@ -45,6 +45,11 @@ function Test-Command {
     $script:totalChecks++
     
     try {
+        # Validate command to prevent injection
+        if ($Command -match '[;&|<>]') {
+            throw "Invalid command format"
+        }
+        
         $output = Invoke-Expression "$Command 2>&1" -ErrorAction Stop
         $exitCode = $LASTEXITCODE
         
@@ -199,6 +204,10 @@ if ($CheckAI -or $All) {
         foreach ($lib in $aiLibraries) {
             $script:totalChecks++
             try {
+                # Validate library name to prevent injection
+                if ($lib -notmatch '^[a-zA-Z0-9\-_]+$') {
+                    throw "Invalid library name"
+                }
                 $version = python -c "import $lib; print($lib.__version__)" 2>&1
                 if ($LASTEXITCODE -eq 0) {
                     Write-Success "$lib is installed"
@@ -220,8 +229,12 @@ if ($CheckAI -or $All) {
         if (Get-Command ollama -ErrorAction SilentlyContinue) {
             Write-Info "Checking Ollama models..."
             try {
+                # Define expected model names
+                $expectedModels = @("llama2", "mistral", "codellama", "tinyllama")
+                $modelPattern = ($expectedModels -join "|")
+                
                 $models = ollama list 2>&1
-                if ($models -match "llama2|mistral|codellama") {
+                if ($models -match $modelPattern) {
                     Write-Success "Ollama models installed"
                     if ($Detailed) {
                         Write-Host $models -ForegroundColor Gray

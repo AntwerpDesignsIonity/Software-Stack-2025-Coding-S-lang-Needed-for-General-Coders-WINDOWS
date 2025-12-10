@@ -17,8 +17,16 @@ A complete, automated software stack installer designed for fresh Windows instal
 ### One-Command Installation
 
 **For Interactive Menu (Recommended for first-time users):**
+
+> ⚠️ **Security Note:** Always verify the source before running remote scripts. Review the script content first if security is a concern.
+
 ```powershell
-# Open PowerShell as Administrator, then run:
+# Option 1: Download first, then review and run (Recommended)
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/AntwerpDesignsIonity/Software-Stack-2025-Coding-S-lang-Needed-for-General-Coders-WINDOWS/main/Install-SoftwareStack.ps1" -OutFile "Install-SoftwareStack.ps1"
+# Review the file, then run:
+.\Install-SoftwareStack.ps1
+
+# Option 2: Direct execution (only if you trust the source)
 Set-ExecutionPolicy Bypass -Scope Process -Force; iwr -useb https://raw.githubusercontent.com/AntwerpDesignsIonity/Software-Stack-2025-Coding-S-lang-Needed-for-General-Coders-WINDOWS/main/Install-SoftwareStack.ps1 | iex
 ```
 
