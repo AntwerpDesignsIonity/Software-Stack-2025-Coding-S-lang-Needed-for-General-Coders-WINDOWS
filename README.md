@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)](https://github.com/AntwerpDesignsIonity/Software-Stack-2025-Coding-S-lang-Needed-for-General-Coders-WINDOWS)
 [![Platform](https://img.shields.io/badge/Platform-Windows-lightgrey.svg)](https://www.microsoft.com/windows)
-[![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-brightgreen.svg)](https://github.com/AntwerpDesignsIonity/Software-Stack-2025-Coding-S-lang-Needed-for-General-Coders-WINDOWS/blob/main/CONTRIBUTING.md)
+[![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-brightgreen.svg)](#contributing)
 
 > A comprehensive software stack installer for Windows that provides all essential tools and programming languages needed for modern software development.
 
@@ -106,7 +106,7 @@ The Software Stack 2025 includes the following tools and programming languages:
 - **JavaScript** - Node.js runtime
 - **TypeScript** - Superset of JavaScript
 - **Java** - JDK for enterprise applications
-- **C#** - .NET development
+- **C\#** - .NET development
 - **C++** - Native development
 - **Go (Golang)** - Modern system programming
 - **Rust** - Memory-safe system programming
