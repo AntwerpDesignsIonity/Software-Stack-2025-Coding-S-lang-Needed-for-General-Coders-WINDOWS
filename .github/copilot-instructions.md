@@ -8,7 +8,7 @@ This repository provides a comprehensive software development stack installer fo
 
 The project covers the following programming languages, tools, and frameworks:
 
-- **Languages**: Python, JavaScript, TypeScript, Java, C\#, C++, Go (Golang), Rust, Ruby, Swift, Kotlin, Lua, PHP, Scala, Objective-C, Dart, Perl, Visual Basic, Ada, MATLAB, Assembly, Bash/Shell
+- **Languages**: Python, JavaScript, TypeScript, Java, C#, C++, Go (Golang), Rust, Ruby, Swift, Kotlin, Lua, PHP, Scala, Objective-C, Dart, Perl, Visual Basic, Ada, MATLAB, Assembly, Bash/Shell
 - **Web Technologies**: HTML5, CSS, HTML/CSS
 - **Databases**: SQL
 - **Frameworks**: Flask, Firebase
@@ -20,10 +20,10 @@ The project covers the following programming languages, tools, and frameworks:
 
 ### Markdown Formatting
 
-- **Always escape special characters in Markdown**: When referencing C#, use `C\#` to properly display the hash character
 - Use clear headings and organized structure
 - Include code examples where appropriate
 - Maintain consistent formatting throughout documentation
+- Use proper Markdown syntax for links, code blocks, and emphasis
 
 ### README Guidelines
 
