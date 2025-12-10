@@ -59,7 +59,7 @@ The project covers the following programming languages, tools, and frameworks:
 ### Copyright and License
 
 - The project is licensed under MIT License
-- Copyright holder: Johan Wilhelm van Antwerp // Antwerp Ecosystems Designs Ionity ÆĐï (2025)
+- Copyright holder: Johan Wilhelm van Antwerp // Antwerp  Ecosystems Designs Ionity ÆĐï (2025)
 - All contributions must comply with the MIT License terms
 - Include proper copyright notices in new files when appropriate
 
