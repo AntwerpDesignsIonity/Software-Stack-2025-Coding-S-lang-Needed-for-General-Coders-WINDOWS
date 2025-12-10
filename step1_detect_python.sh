@@ -148,11 +148,11 @@ case $OS in
         echo "Note: For comprehensive Windows detection, use the PowerShell script"
         echo "--------------------------------------"
         
-        # Check common Windows paths
+        # Check common Windows paths (using HOME for Unix compatibility in Git Bash)
         WINDOWS_PATHS=(
             "/c/Python3*"
             "/c/Program Files/Python3*"
-            "$USERPROFILE/AppData/Local/Programs/Python/Python3*"
+            "$HOME/AppData/Local/Programs/Python/Python3*"
         )
         
         for path_pattern in "${WINDOWS_PATHS[@]}"; do
