@@ -301,7 +301,7 @@ def get_commands_for_item(item_name, item_type):
         elif os_type == "macos":
             commands = ["# Objective-C is included with Xcode Command Line Tools", "xcode-select --install"]
         elif os_type == "linux":
-            commands = ["sudo:apt update", "sudo:apt install -y gobjc gnustep gnustep-dev libgnustep-base-dev"]
+            commands = ["sudo:apt update", "sudo:apt install -y gobjc gnustep-make gnustep-dev libgnustep-base-dev"]
     
     elif item_name == "Delphi/Object Pascal":
         # Delphi is proprietary - open vendor URL
