@@ -50,10 +50,10 @@ class SoftwareStackInstaller:
             "Web Technologies": {
                 "Node.js & NPM": {"url": "https://nodejs.org/", "checked": False},
                 "PHP": {"url": "https://windows.php.net/download/", "checked": False},
-                "TypeScript": {"url": "npm", "checked": False},
+                "TypeScript": {"url": "npm", "package": "typescript", "checked": False},
             },
             "Python Frameworks & Tools": {
-                "Flask": {"url": "pip", "checked": False},
+                "Flask": {"url": "pip", "package": "flask", "checked": False},
                 "Python venv": {"url": "builtin", "checked": False},
             },
             "Shell & Terminal": {
@@ -61,8 +61,8 @@ class SoftwareStackInstaller:
                 "PowerShell 7": {"url": "https://github.com/PowerShell/PowerShell/releases", "checked": False},
             },
             "Cloud & Firebase": {
-                "Firebase CLI": {"url": "npm", "checked": False},
-                "Firebase SDK": {"url": "npm", "checked": False},
+                "Firebase CLI": {"url": "npm", "package": "firebase-tools", "checked": False},
+                "Firebase SDK": {"url": "https://firebase.google.com/docs/web/setup", "checked": False},
                 "Google Cloud SDK": {"url": "https://cloud.google.com/sdk/docs/install", "checked": False},
             },
             "Mobile Development": {
@@ -249,12 +249,21 @@ class SoftwareStackInstaller:
             guide_lines.append("-" * 40)
             
             if url == "pip":
-                self.log_message(f"  → Install via pip: pip install {item_name.lower()}")
-                guide_lines.append(f"Installation: pip install {item_name.lower()}")
+                # Get package name from component data or use lowercase item name
+                for category, items in self.software_components.items():
+                    if item_name in items:
+                        package_name = items[item_name].get("package", item_name.lower())
+                        break
+                self.log_message(f"  → Install via pip: pip install {package_name}")
+                guide_lines.append(f"Installation: pip install {package_name}")
                 guide_lines.append(f"Note: Requires Python to be installed first")
                 
             elif url == "npm":
-                package_name = item_name.lower().replace(" ", "-")
+                # Get package name from component data or derive from item name
+                for category, items in self.software_components.items():
+                    if item_name in items:
+                        package_name = items[item_name].get("package", item_name.lower().replace(" ", "-"))
+                        break
                 self.log_message(f"  → Install via npm: npm install -g {package_name}")
                 guide_lines.append(f"Installation: npm install -g {package_name}")
                 guide_lines.append(f"Note: Requires Node.js and NPM to be installed first")
