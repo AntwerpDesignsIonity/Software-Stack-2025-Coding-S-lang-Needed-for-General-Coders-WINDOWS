@@ -1,0 +1,2 @@
+# Software-Stack-2025-Coding-S-lang-Needed-for-General-Coders-WINDOWS
+Installer For Coding Needs Genral and Stack:Npm, powershell, Git-bash, Java, Rust, venv, python, html5, Javascript, html/css, SQL, php, typescript, bash/shell, C$, C++, Go (Golang), Kotlin, lua, flask, ruby, swift , assembly, firebase CLI, SDK Kits [GenAi, Firebase, Google Cloud, Android SDK], CSS, Scala, Object-C,matlab,perl,visual basic, Ada,Dart
