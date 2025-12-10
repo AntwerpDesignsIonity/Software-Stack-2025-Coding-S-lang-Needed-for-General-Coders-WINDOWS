@@ -235,13 +235,8 @@ def get_commands_for_item(item_name, item_type):
             commands = ["sudo:apt update", "sudo:apt install -y kotlin"]
     
     elif item_name == "TypeScript":
-        # TypeScript requires Node.js/npm
-        if os_type == "windows":
-            commands = ["npm install -g typescript"]
-        elif os_type == "macos":
-            commands = ["npm install -g typescript"]
-        elif os_type == "linux":
-            commands = ["npm install -g typescript"]
+        # TypeScript requires Node.js/npm - same command across all platforms
+        commands = ["npm install -g typescript"]
     
     elif item_name == "MATLAB":
         # MATLAB is proprietary - open vendor URL
@@ -269,8 +264,10 @@ def get_commands_for_item(item_name, item_type):
         elif os_type == "macos":
             commands = ["brew tap dart-lang/dart", "brew install dart"]
         elif os_type == "linux":
+            # TODO: Update to use modern apt keyring approach for maintainers
+            # Modern approach: wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo tee /etc/apt/keyrings/dart.asc
             commands = ["sudo:apt update", "sudo:apt install -y apt-transport-https", 
-                       "sudo:sh -c 'wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'",
+                       "sudo:sh -c 'wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | tee /etc/apt/keyrings/dart.asc > /dev/null'",
                        "sudo:sh -c 'wget -qO- https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list'",
                        "sudo:apt update", "sudo:apt install -y dart"]
     
@@ -287,9 +284,8 @@ def get_commands_for_item(item_name, item_type):
             commands = ["sudo:apt update", "sudo:apt install -y scala"]
     
     elif item_name == "CSS tooling":
-        # CSS tooling via Node.js packages
-        if os_type in ["windows", "macos", "linux"]:
-            commands = ["npm install -g postcss-cli autoprefixer"]
+        # CSS tooling via Node.js packages - same command across all platforms
+        commands = ["npm install -g postcss-cli autoprefixer"]
     
     elif item_name == "Assembly (NASM)":
         if os_type == "windows":
@@ -305,7 +301,7 @@ def get_commands_for_item(item_name, item_type):
         elif os_type == "macos":
             commands = ["# Objective-C is included with Xcode Command Line Tools", "xcode-select --install"]
         elif os_type == "linux":
-            commands = ["sudo:apt update", "sudo:apt install -y gobjc gnustep gnustep-devel"]
+            commands = ["sudo:apt update", "sudo:apt install -y gobjc gnustep gnustep-dev libgnustep-base-dev"]
     
     elif item_name == "Delphi/Object Pascal":
         # Delphi is proprietary - open vendor URL
@@ -353,8 +349,8 @@ def get_commands_for_item(item_name, item_type):
             commands = ["sudo:apt update", "sudo:apt install -y code"]
     
     elif item_name == "Firebase CLI":
-        if os_type in ["windows", "macos", "linux"]:
-            commands = ["npm install -g firebase-tools"]
+        # Firebase CLI via npm - same command across all platforms
+        commands = ["npm install -g firebase-tools"]
     
     elif item_name == "Google Cloud SDK (gcloud)":
         if os_type == "windows":
@@ -704,6 +700,12 @@ class InstallerGUI:
     def execute_command(self, cmd, elevated=False):
         """Execute a command and log the output."""
         try:
+            # Handle elevated commands on Unix-like systems
+            if elevated and get_os_type() in ["linux", "macos"]:
+                # On Unix, sudo should already be in the command from get_commands_for_item()
+                # This parameter is here for future Windows UAC handling
+                pass
+            
             log_message(f"Executing: {cmd}")
             
             # Use shell=True for complex commands
