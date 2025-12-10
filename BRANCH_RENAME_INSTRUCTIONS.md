@@ -168,9 +168,9 @@ A: Yes, update any webhooks, integrations, or external services that reference t
 
 ## Support
 
-For questions or issues during the rename process, contact:
-- Repository Administrator: AntwerpDesignsIonity
-- Issues: https://github.com/AntwerpDesignsIonity/Software-Stack-2025-Coding-S-lang-Needed-for-General-Coders-WINDOWS/issues
+For questions or issues during the rename process:
+- Contact your repository administrator
+- Open an issue in the repository's Issues section
 
 ## Implementation Date
 To be determined by repository administrators.

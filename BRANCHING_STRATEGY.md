@@ -14,11 +14,12 @@ This repository uses a simplified branching strategy with **SEED** as the main b
 ### Development Branches
 
 #### Feature Branches
-- **Naming Convention:** `feature/description` or `copilot/feature-name`
+- **Naming Convention:** `feature/description`
 - **Purpose:** New features or enhancements
 - **Created From:** SEED
 - **Merges Into:** SEED
-- **Example:** `feature/add-python-installer`, `copilot/add-readme-file`
+- **Example:** `feature/add-python-installer`, `feature/add-readme-file`
+- **Note:** Automated tools may use prefixes like `copilot/` or `bot/` - these follow the same workflow
 
 #### Bug Fix Branches
 - **Naming Convention:** `bugfix/description`
@@ -140,5 +141,5 @@ All contributions should follow this branching strategy. For more details on con
 
 ---
 
-Last Updated: December 2025  
+Last Updated: December 2024  
 Repository: Software-Stack-2025-Coding-S-lang-Needed-for-General-Coders-WINDOWS
