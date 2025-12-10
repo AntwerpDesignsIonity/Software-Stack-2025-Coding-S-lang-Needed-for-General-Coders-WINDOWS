@@ -25,7 +25,7 @@ The Ionity GUI Installer (`ionity_installer_gui.py`) is a Tkinter-based graphica
 ## System Requirements
 
 ### Minimum Requirements
-- **Python:** 3.6 or higher
+- **Python:** 3.8 or higher
 - **GUI Framework:** tkinter (usually included with Python)
 - **Operating System:** 
   - Windows 10 or higher (with winget or chocolatey)
@@ -42,7 +42,7 @@ If no package manager is detected, the script will show you the commands to run 
 
 ## Installation
 
-1. Ensure Python 3.6+ is installed:
+1. Ensure Python 3.8+ is installed:
    ```bash
    python3 --version
    ```

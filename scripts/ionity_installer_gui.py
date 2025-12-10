@@ -19,7 +19,7 @@ USAGE:
     python3 scripts/ionity_installer_gui.py
 
 REQUIREMENTS:
-    - Python 3.6+
+    - Python 3.8+
     - tkinter (usually included with Python)
     - Appropriate package manager installed on the system
 
@@ -188,8 +188,7 @@ class IonityInstaller:
                     "winget": ["winget", "install", "--id", "Rustlang.Rustup", "-e"],
                     "choco": ["choco", "install", "rust", "-y"],
                     "brew": ["brew", "install", "rust"],
-                    "apt": ["curl", "--proto", "=https", "--tlsv1.2", "-sSf", 
-                           "https://sh.rustup.rs", "|", "sh", "-s", "--", "-y"]
+                    "apt": ["bash", "-c", "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y"]
                 }
             },
             "Java (OpenJDK)": {
@@ -671,8 +670,8 @@ class IonityInstaller:
 def main():
     """Main entry point for the installer."""
     # Check Python version
-    if sys.version_info < (3, 6):
-        print("ERROR: This script requires Python 3.6 or higher")
+    if sys.version_info < (3, 8):
+        print("ERROR: This script requires Python 3.8 or higher")
         print(f"Current version: {sys.version}")
         sys.exit(1)
     
