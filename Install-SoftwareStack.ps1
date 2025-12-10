@@ -187,7 +187,7 @@ function Install-AITools {
     try {
         $ollamaInstaller = "$env:TEMP\OllamaSetup.exe"
         Write-Info "Downloading Ollama from official source..."
-        Write-Warning "Please verify the download from https://ollama.ai if security is a concern"
+        Write-Warning "For maximum security, download manually from https://ollama.ai and verify the file signature"
         
         # Download with progress
         $ProgressPreference = 'SilentlyContinue'
@@ -198,6 +198,11 @@ function Install-AITools {
         if (Test-Path $ollamaInstaller) {
             $fileSize = (Get-Item $ollamaInstaller).Length
             Write-Info "Downloaded Ollama installer ($([math]::Round($fileSize/1MB, 2)) MB)"
+            
+            # Note: For production use, verify file hash against known good hash
+            # Example: $hash = Get-FileHash -Path $ollamaInstaller -Algorithm SHA256
+            #          if ($hash.Hash -ne "EXPECTED_HASH") { throw "Hash mismatch" }
+            
             Start-Process -FilePath $ollamaInstaller -ArgumentList "/SILENT" -Wait
             Remove-Item $ollamaInstaller -Force -ErrorAction SilentlyContinue
             Write-Success "Ollama installed successfully"

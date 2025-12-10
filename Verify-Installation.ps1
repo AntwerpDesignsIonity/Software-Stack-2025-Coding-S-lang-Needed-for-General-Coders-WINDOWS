@@ -45,8 +45,8 @@ function Test-Command {
     $script:totalChecks++
     
     try {
-        # Validate command to prevent injection
-        if ($Command -match '[;&|<>]') {
+        # Validate command to prevent injection (including backticks for PowerShell command substitution)
+        if ($Command -match '[;&|<>`]') {
             throw "Invalid command format"
         }
         
@@ -204,8 +204,8 @@ if ($CheckAI -or $All) {
         foreach ($lib in $aiLibraries) {
             $script:totalChecks++
             try {
-                # Validate library name to prevent injection
-                if ($lib -notmatch '^[a-zA-Z0-9\-_]+$') {
+                # Validate library name to prevent injection (allow dots for packages like scikit-learn)
+                if ($lib -notmatch '^[a-zA-Z0-9\-_.]+$') {
                     throw "Invalid library name"
                 }
                 $version = python -c "import $lib; print($lib.__version__)" 2>&1
