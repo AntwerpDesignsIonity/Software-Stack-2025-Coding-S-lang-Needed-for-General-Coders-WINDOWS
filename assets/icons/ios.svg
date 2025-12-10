@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-label="iOS Logo">
+  <title>iOS</title>
+  <desc>Apple iOS operating system logo</desc>
+  <rect x="5" y="3" width="14" height="18" rx="2" fill="#000000"/>
+  <rect x="6" y="4" width="12" height="15" rx="1" fill="#ffffff"/>
+  <circle cx="12" cy="20" r="1" fill="#000000"/>
+  <line x1="9" y1="4.5" x2="15" y2="4.5" stroke="#000000" stroke-width="0.5"/>
+</svg>
