@@ -255,7 +255,7 @@ class InstallerGUI:
                 "java": ["brew install openjdk@21"],
                 "csharp": ["brew install --cask dotnet-sdk"],
                 "cpp": ["xcode-select --install"],
-                "rust": ["curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"],
+                "rust": ["# Download Rust installer (official rustup)", "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y"],
                 "go": ["brew install go"],
                 "php": ["brew install php", "brew install composer"],
                 "ruby": ["brew install ruby"],
@@ -271,7 +271,7 @@ class InstallerGUI:
                 "assembly": ["brew install nasm"],
                 "matlab": ["open_url:https://www.mathworks.com/downloads/"],
                 "visualbasic": ["open_url:https://visualstudio.microsoft.com/vs/mac/"],
-                "sql": ["brew install sqlite", "brew install postgresql@15"],
+                "sql": ["brew install sqlite", "brew install postgresql"],
                 "css_tools": ["npm install -g postcss-cli autoprefixer"],
                 "git": ["brew install git"],
                 "docker": ["brew install --cask docker"],
@@ -287,10 +287,11 @@ class InstallerGUI:
                 "javascript": ["curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -", "sudo apt install -y nodejs"],
                 "typescript": ["npm install -g typescript"],
                 "java": ["sudo apt update", "sudo apt install -y openjdk-21-jdk"],
-                "csharp": ["wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb", 
+                "csharp": ["# NOTE: Update ubuntu version (22.04) if needed for your system",
+                          "wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb", 
                           "sudo dpkg -i packages-microsoft-prod.deb", "sudo apt update", "sudo apt install -y dotnet-sdk-8.0"],
                 "cpp": ["sudo apt update", "sudo apt install -y build-essential clang"],
-                "rust": ["curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"],
+                "rust": ["# Download Rust installer (official rustup)", "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y"],
                 "go": ["sudo apt update", "sudo apt install -y golang"],
                 "php": ["sudo apt update", "sudo apt install -y php php-cli composer"],
                 "ruby": ["sudo apt update", "sudo apt install -y ruby-full"],
@@ -312,7 +313,9 @@ class InstallerGUI:
                 "sql": ["sudo apt update", "sudo apt install -y sqlite3 postgresql-client"],
                 "css_tools": ["npm install -g postcss-cli autoprefixer"],
                 "git": ["sudo apt update", "sudo apt install -y git"],
-                "docker": ["curl -fsSL https://get.docker.com -o get-docker.sh", "sudo sh get-docker.sh"],
+                "docker": ["# Docker installation script from official source", 
+                          "curl -fsSL https://get.docker.com -o get-docker.sh", 
+                          "# Review get-docker.sh before running", "sudo sh get-docker.sh"],
                 "vscode": ["sudo snap install --classic code"],
                 "firebase": ["npm install -g firebase-tools"],
                 "gcloud": ["open_url:https://cloud.google.com/sdk/docs/install"],
@@ -389,12 +392,17 @@ class InstallerGUI:
                     self.log_message(f"Opening URL: {url}")
                     if not self.dry_run.get():
                         webbrowser.open(url)
+                elif cmd.startswith("#"):
+                    # Skip comment lines
+                    self.log_message(f"Note: {cmd}")
                 else:
                     self.log_message(f"Command: {cmd}")
                     
                     if not self.dry_run.get():
                         try:
-                            # Execute command
+                            # Execute command with shell=True
+                            # NOTE: Commands are predefined and not user-controlled
+                            # This is safe because all commands come from get_commands_for_item()
                             result = subprocess.run(cmd, shell=True, 
                                                   capture_output=True, text=True, 
                                                   timeout=300)
