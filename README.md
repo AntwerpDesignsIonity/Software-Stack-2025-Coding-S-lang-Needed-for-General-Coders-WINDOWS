@@ -90,3 +90,8 @@ If you want, I can:
 - Create the pull request with these files and the commit message "chore: add icons and metadata; update README Step 1",
 - Or further refine icons (different colours / svg styles).
 ```
+
+
+
+
+keep my for.ating yet increase and expand tbis into lowerahell also to create a fullstack for offline hybrid ai as needed wjth akfteare to be one shot insfaller automates and no crashed 
