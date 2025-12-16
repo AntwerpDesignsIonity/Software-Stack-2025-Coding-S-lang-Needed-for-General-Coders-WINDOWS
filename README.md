@@ -1,5 +1,26 @@
 ```markdown
-# Software Stack 2025 — Step 1: Install Python (Latest official)
+# Software Stack 2025 — Automated Installer for General Coders (Windows, macOS, Linux)
+
+## 🚀 Quick Start - One-Shot Installer
+
+**NEW**: Use our automated GUI installer to quickly set up your complete development stack!
+
+```bash
+python3 scripts/ionity_installer_gui.py
+```
+
+See [QUICKSTART.md](QUICKSTART.md) for detailed instructions and [scripts/README.md](scripts/README.md) for full documentation.
+
+### Features:
+- ✓ 30+ programming languages and tools
+- ✓ Multi-platform support (Windows, macOS, Linux)
+- ✓ Safe dry-run mode by default
+- ✓ Preview commands before execution
+- ✓ Comprehensive logging
+
+---
+
+## Step 1: Install Python (Latest official)
 
 This Step 1 lists the official/latest Python download pages and recommended installers for all major OS types (Windows, macOS, Linux, Android, iOS). Where mobile platforms don't have an "official CPython app", recommended, well-known ports/clients are listed. Always prefer the official Python downloads at python.org for desktop/server installs.
 
