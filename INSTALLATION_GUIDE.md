@@ -209,7 +209,7 @@ For issues, questions, or contributions:
 
 - **Author:** Johan Wilhelm van Antwerp
 - **Email:** Services@ionity.world
-- **Alternative Email:** johan van Antwerp@gmail.com
+- **Alternative Email:** johanvanantwerp@gmail.com
 - **Phone:** +27 646999877
 - **LinkedIn:** https://www.linkedin.com/in/johanvanantwerp/
 - **Location:** Centurion, South Africa

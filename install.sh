@@ -246,7 +246,7 @@ install_dev_tools() {
                     curl -fsSL https://get.docker.com -o get-docker.sh
                     sudo sh get-docker.sh
                     rm get-docker.sh
-                    sudo usermod -aG docker $USER
+                    sudo usermod -aG docker "$USER"
                     success "Docker installed successfully. Please log out and back in for group changes to take effect."
                 else
                     warn "Please install Docker manually from: https://docs.docker.com/engine/install/"
@@ -307,69 +307,70 @@ install_additional_languages() {
     echo "5) PHP"
     echo "6) All of the above"
     echo "7) Skip"
-    read -p "Enter your choice (1-7): " lang_choice
+    read -r -p "Enter your choice (1-7): " lang_choice
     
-    case $lang_choice in
-        1|6)
-            log "Installing Java (OpenJDK)..."
-            if [[ "$OS" == "macos" ]]; then
-                brew install openjdk
-            elif [[ "$PKG_MANAGER" == "apt" ]]; then
-                sudo apt-get install -y default-jdk
-            elif [[ "$PKG_MANAGER" == "dnf" ]]; then
-                sudo dnf install -y java-latest-openjdk
-            fi
-            ;&
-        2|6)
-            if [[ $lang_choice == 6 ]] || [[ $lang_choice == 2 ]]; then
-                log "Installing Rust..."
-                curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-                source "$HOME/.cargo/env"
-            fi
-            ;&
-        3|6)
-            if [[ $lang_choice == 6 ]] || [[ $lang_choice == 3 ]]; then
-                log "Installing Go..."
-                if [[ "$OS" == "macos" ]]; then
-                    brew install go
-                elif [[ "$PKG_MANAGER" == "apt" ]]; then
-                    sudo apt-get install -y golang-go
-                elif [[ "$PKG_MANAGER" == "dnf" ]]; then
-                    sudo dnf install -y golang
-                fi
-            fi
-            ;&
-        4|6)
-            if [[ $lang_choice == 6 ]] || [[ $lang_choice == 4 ]]; then
-                log "Installing Ruby..."
-                if [[ "$OS" == "macos" ]]; then
-                    brew install ruby
-                elif [[ "$PKG_MANAGER" == "apt" ]]; then
-                    sudo apt-get install -y ruby-full
-                elif [[ "$PKG_MANAGER" == "dnf" ]]; then
-                    sudo dnf install -y ruby
-                fi
-            fi
-            ;&
-        5|6)
-            if [[ $lang_choice == 6 ]] || [[ $lang_choice == 5 ]]; then
-                log "Installing PHP..."
-                if [[ "$OS" == "macos" ]]; then
-                    brew install php
-                elif [[ "$PKG_MANAGER" == "apt" ]]; then
-                    sudo apt-get install -y php php-cli php-common
-                elif [[ "$PKG_MANAGER" == "dnf" ]]; then
-                    sudo dnf install -y php php-cli
-                fi
-            fi
-            ;;
-        7)
-            log "Skipping additional languages installation"
-            ;;
-        *)
-            warn "Invalid choice. Skipping additional languages installation"
-            ;;
-    esac
+    # Install Java if choice is 1 or 6
+    if [[ $lang_choice == 1 ]] || [[ $lang_choice == 6 ]]; then
+        log "Installing Java (OpenJDK)..."
+        if [[ "$OS" == "macos" ]]; then
+            brew install openjdk
+        elif [[ "$PKG_MANAGER" == "apt" ]]; then
+            sudo apt-get install -y default-jdk
+        elif [[ "$PKG_MANAGER" == "dnf" ]]; then
+            sudo dnf install -y java-latest-openjdk
+        fi
+    fi
+    
+    # Install Rust if choice is 2 or 6
+    if [[ $lang_choice == 2 ]] || [[ $lang_choice == 6 ]]; then
+        log "Installing Rust..."
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        # shellcheck disable=SC1091
+        source "$HOME/.cargo/env" 2>/dev/null || true
+    fi
+    
+    # Install Go if choice is 3 or 6
+    if [[ $lang_choice == 3 ]] || [[ $lang_choice == 6 ]]; then
+        log "Installing Go..."
+        if [[ "$OS" == "macos" ]]; then
+            brew install go
+        elif [[ "$PKG_MANAGER" == "apt" ]]; then
+            sudo apt-get install -y golang-go
+        elif [[ "$PKG_MANAGER" == "dnf" ]]; then
+            sudo dnf install -y golang
+        fi
+    fi
+    
+    # Install Ruby if choice is 4 or 6
+    if [[ $lang_choice == 4 ]] || [[ $lang_choice == 6 ]]; then
+        log "Installing Ruby..."
+        if [[ "$OS" == "macos" ]]; then
+            brew install ruby
+        elif [[ "$PKG_MANAGER" == "apt" ]]; then
+            sudo apt-get install -y ruby-full
+        elif [[ "$PKG_MANAGER" == "dnf" ]]; then
+            sudo dnf install -y ruby
+        fi
+    fi
+    
+    # Install PHP if choice is 5 or 6
+    if [[ $lang_choice == 5 ]] || [[ $lang_choice == 6 ]]; then
+        log "Installing PHP..."
+        if [[ "$OS" == "macos" ]]; then
+            brew install php
+        elif [[ "$PKG_MANAGER" == "apt" ]]; then
+            sudo apt-get install -y php php-cli php-common
+        elif [[ "$PKG_MANAGER" == "dnf" ]]; then
+            sudo dnf install -y php php-cli
+        fi
+    fi
+    
+    # Skip message for choice 7
+    if [[ $lang_choice == 7 ]]; then
+        log "Skipping additional languages installation"
+    elif [[ ! $lang_choice =~ ^[1-6]$ ]]; then
+        warn "Invalid choice. Skipping additional languages installation"
+    fi
 }
 
 ################################################################################

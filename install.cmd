@@ -309,6 +309,20 @@ if "%LANG_CHOICE%"=="6" goto INSTALL_ALL_LANGS
 if "%LANG_CHOICE%"=="7" goto SKIP_LANGS
 goto SKIP_LANGS
 
+:INSTALL_ALL_LANGS
+echo [INFO] Installing Java (OpenJDK)...
+winget install -e --id Microsoft.OpenJDK.17 --silent --accept-package-agreements --accept-source-agreements
+echo [INFO] Installing Rust...
+winget install -e --id Rustlang.Rustup --silent --accept-package-agreements --accept-source-agreements
+echo [INFO] Installing Go...
+winget install -e --id GoLang.Go --silent --accept-package-agreements --accept-source-agreements
+echo [INFO] Installing Ruby...
+winget install -e --id RubyInstallerTeam.Ruby --silent --accept-package-agreements --accept-source-agreements
+echo [INFO] Installing PHP...
+winget install -e --id XAMPP.XAMPP --silent --accept-package-agreements --accept-source-agreements
+echo [SUCCESS] Additional languages installed
+goto SKIP_LANGS
+
 :INSTALL_JAVA
 echo [INFO] Installing Java (OpenJDK)...
 winget install -e --id Microsoft.OpenJDK.17 --silent --accept-package-agreements --accept-source-agreements
@@ -336,11 +350,6 @@ goto SKIP_LANGS
 :INSTALL_PHP
 echo [INFO] Installing PHP...
 winget install -e --id XAMPP.XAMPP --silent --accept-package-agreements --accept-source-agreements
-if "%LANG_CHOICE%"=="6" goto INSTALL_ALL_LANGS
-goto SKIP_LANGS
-
-:INSTALL_ALL_LANGS
-echo [SUCCESS] Additional languages installed
 goto SKIP_LANGS
 
 :SKIP_LANGS
